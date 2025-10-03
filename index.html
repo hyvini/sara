@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Para Minha Menina</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="page page--lock">
+    <div class="hearts hearts--one"></div>
+    <div class="hearts hearts--two"></div>
+    <div class="hearts hearts--three"></div>
+    <main class="card">
+      <h1 class="card__title">Oi, amor!</h1>
+      <p class="card__subtitle">Para continuar, me conta:</p>
+      <p class="card__question">"Quem disse o primeiro eu te amo?"</p>
+      <form class="lock" id="lock-form">
+        <label class="lock__label" for="password">Digite a resposta mágica</label>
+        <div class="lock__input-group">
+          <input
+            id="password"
+            type="password"
+            placeholder="Segredinho..."
+            autocomplete="off"
+            required
+          />
+          <button type="submit" class="lock__button">Desbloquear</button>
+        </div>
+        <p class="lock__hint">Dica: o nome mais doce do mundo 💗</p>
+        <p class="lock__error" id="error" aria-live="assertive"></p>
+      </form>
+    </main>
+    <script>
+      const form = document.getElementById("lock-form");
+      const passwordField = document.getElementById("password");
+      const errorMessage = document.getElementById("error");
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const value = passwordField.value.trim();
+
+        if (value.toLowerCase() === "sara") {
+          errorMessage.textContent = "";
+          form.classList.remove("lock--shake");
+          window.location.href = "amor.html";
+        } else {
+          errorMessage.textContent = "Hmmm... tenta lembrar como você mesma respondeu.";
+          form.classList.remove("lock--shake");
+          // Trigger reflow to restart the animation
+          void form.offsetWidth;
+          form.classList.add("lock--shake");
+          passwordField.focus();
+        }
+      });
+    </script>
+  </body>
+</html>
